@@ -12,6 +12,6 @@ router.post('/', registerUser);
 
 router.post('/login', loginUser);
 
-router.get('/me', protect, getMe);
+router.get('/:id', protect, getMe);
 
 module.exports = router;

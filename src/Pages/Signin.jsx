@@ -12,8 +12,6 @@ function Signin() {
 
 let name, value;
 
-const {email,password} = formData;
-
 const onChange = (e) => {
   name = e.target.name; //name will be replaced by the value of name of the form element
   value = e.target.value;
@@ -25,6 +23,7 @@ const signin = async(e) =>{
   e.preventDefault();
   const {email, password} = formData;
 
+  //store in env and make services directory
   const res = await fetch("http://localhost:5000/api/users/login",{
       method: "POST",
       headers: {'Content-Type':'application/json'},
@@ -96,13 +95,13 @@ const signin = async(e) =>{
               Login now!
             </Button>
 
-            <Button
+            {/* <Button
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
                 >
                 login with google
-            </Button>
+            </Button> */}
 
             <Grid container justifyContent="center">
               <Grid item>

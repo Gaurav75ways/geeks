@@ -13,7 +13,7 @@ const protect = asyncHandler(async (req, res, next) => {
       //get token from header
       token = req.headers.authorization.split(' ')[1]; //formatted as Bearer<space>required token, we'll split it into array at space and since the array is 0 indexed we can acces the token at index 1
 
-      //verify token
+      //verify token on server
       const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
 
       //get user from token
@@ -27,7 +27,7 @@ const protect = asyncHandler(async (req, res, next) => {
     }
   }
 
-  //if there's no token
+  // if there's no token
   if (!token) {
     res.status(401);
     throw new Error('Unauthorized');

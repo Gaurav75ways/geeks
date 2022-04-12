@@ -33,6 +33,7 @@ app.get('/',(req,res)=>{
     res.json({message:"welcome to the geek spotters server"})
 });
 
+//this is duplicated must be removed
 app.get('/google/callback',
   passport.authenticate( 'google', {
     successRedirect: '/dashboard',
@@ -46,7 +47,7 @@ app.get('/auth/failure', (req, res) => {
 
 //protected
 app.get('/dashboard', isLoggedIn, (req,res)=>{
-  res.send(`hello `);
+  res.redirect("http://localhost:5001/Dashboard")
 })
 
 //logout

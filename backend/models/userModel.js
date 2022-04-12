@@ -25,6 +25,9 @@ const userSchema = new  mongoose.Schema({
     //     type:Boolean,
     //     required:[true, 'Please select the checkbox to continue']
     // },
+    token:{
+        type: String,
+    }
 },
 {
     timestamps: true,
