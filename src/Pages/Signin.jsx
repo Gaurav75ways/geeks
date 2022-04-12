@@ -1,9 +1,10 @@
 import React from 'react'
 import {Box, Container, Typography, Card, Button, Grid, TextField, FormControlLabel, Checkbox} from '@mui/material'
 import {useState} from 'react'
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 
 function Signin() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email:'',
     password:'',
@@ -18,6 +19,26 @@ const onChange = (e) => {
   value = e.target.value;
 
   setFormData({...formData, [name]:value});
+}
+
+const signin = async(e) =>{
+  e.preventDefault();
+  const {email, password} = formData;
+
+  const res = await fetch("http://localhost:5000/api/users/login",{
+      method: "POST",
+      headers: {'Content-Type':'application/json'},
+      body:JSON.stringify({
+          email,
+          password,
+      })
+  })
+  const data = await res.json()
+  if(res.status === 400 || !data){
+      console.log("Login Failed")
+  }else{
+      navigate("/Dashboard")
+  }
 }
 
   return (
@@ -38,7 +59,8 @@ const onChange = (e) => {
             </Typography>
           </Box>
 
-          <Box component="form" sx={{ mt: 3 }}>
+          <form method = "POST">
+          <Box sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
@@ -69,6 +91,7 @@ const onChange = (e) => {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              onClick={signin}
             >
               Login now!
             </Button>
@@ -90,6 +113,7 @@ const onChange = (e) => {
               </Grid>
             </Grid>
           </Box>
+          </form>
         </Card>
         </Box>
   )

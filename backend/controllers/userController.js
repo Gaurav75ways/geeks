@@ -7,6 +7,7 @@ const generateToken = require('../jwt/token');
 const registerUser = asyncHandler(async (req, res) => {
   const { firstname, lastname, email, email2, password, password2 } = req.body;
   console.log(req.body);
+  
   //checking for empty data fields
   if (!firstname || !lastname || !email || !email2 || !password || !password2 ) {
     res.status(400);
@@ -65,7 +66,6 @@ const loginUser = asyncHandler(async (req, res) => {
       firstname: user.firstname,
       lastname: user.lastname,
       email: user.email,
-      // agreement: user.agreement,
       token: generateToken(user._id),
     });
   } else {
