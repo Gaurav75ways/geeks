@@ -95,13 +95,13 @@ const signin = async(e) =>{
               Login now!
             </Button>
 
-            {/* <Button
+            <Button
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
                 >
                 login with google
-            </Button> */}
+            </Button>
 
             <Grid container justifyContent="center">
               <Grid item>
