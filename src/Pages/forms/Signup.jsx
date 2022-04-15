@@ -1,27 +1,24 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import {Button} from "react-bootstrap"
+import { Button } from 'react-bootstrap';
+import '../../styles/styles.components/form.css';
 
 function Signup() {
   const navigate = useNavigate();
-
   const [formData, setFormData] = useState({
     firstname: '',
     lastname: '',
     email: '',
     email2: '',
     password: '',
-    password2: '',
-    // agreement:'',
+    password2: '', // agreement:'',
   });
 
   let name, value;
-
   const onChange = (e) => {
     name = e.target.name; //name will be replaced by the value of name of the form element
     value = e.target.value;
-
     setFormData({ ...formData, [name]: value });
   };
 
@@ -29,7 +26,6 @@ function Signup() {
     e.preventDefault();
     const { firstname, lastname, email, email2, password, password2 } =
       formData;
-
     const res = await fetch('http://localhost:5000/api/users', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -39,10 +35,10 @@ function Signup() {
         email,
         email2,
         password,
-        password2,
-        // agreement,
+        password2, // agreement,
       }),
     });
+
     const data = await res.json();
     if (res.status === 400 || !data) {
       console.log('Registration Failed');
@@ -52,9 +48,9 @@ function Signup() {
   };
 
   return (
-    <>
-      <section className='space'></section>
-      <div className='selection-box container'>
+    <div className='form-container'>
+      <div className='green-bar'></div>
+      <div className='form-wrapper selection-box container'>
         <div className='row'>
           <div className='container d-flex flex-column justify-content-center align-items-center mb-5'>
             <div
@@ -65,11 +61,11 @@ function Signup() {
             </div>
 
             <form>
-              <div class='mb-3'>
-              <div class="container">
-                <div class="row row-cols-2" style={{rowGap:"1em"}}>
-                    <div class="col">
-                    <input
+              <div className='mb-3'>
+                <div className='controls-container container '>
+                  <div className='row row-cols-2'>
+                    <div className='col'>
+                      <input
                         type='text'
                         className='form-control'
                         placeholder='First Name*'
@@ -81,8 +77,9 @@ function Signup() {
                         value={formData.firstname}
                       />
                     </div>
-                    <div class="col">
-                    <input
+
+                    <div class='col'>
+                      <input
                         type='text'
                         className='form-control'
                         placeholder='Last Name*'
@@ -94,8 +91,9 @@ function Signup() {
                         value={formData.lastname}
                       />
                     </div>
-                    <div class="col">
-                    <input
+
+                    <div class='col'>
+                      <input
                         type='email'
                         className='form-control'
                         placeholder='Email*'
@@ -107,8 +105,9 @@ function Signup() {
                         value={formData.email}
                       />
                     </div>
-                    <div class="col">
-                    <input
+
+                    <div class='col'>
+                      <input
                         type='email'
                         className='form-control'
                         placeholder='Confirm Email*'
@@ -120,8 +119,9 @@ function Signup() {
                         value={formData.email2}
                       />
                     </div>
-                    <div class="col">
-                    <input
+
+                    <div class='col'>
+                      <input
                         type='password'
                         className='form-control'
                         placeholder='Password*'
@@ -133,8 +133,9 @@ function Signup() {
                         value={formData.password}
                       />
                     </div>
-                    <div class="col">
-                    <input
+
+                    <div class='col'>
+                      <input
                         type='password'
                         className='form-control'
                         placeholder='Confirm Password*'
@@ -146,51 +147,56 @@ function Signup() {
                         value={formData.password2}
                       />
                     </div>
-                    <div class="col d-flex justify-content-end">
-                        <Button className='btn-success '
+
+                    <div class='col d-flex justify-content-end'>
+                      <Button
+                        className='btn'
                         type='submit'
                         onClick={register}
-                        >
-                            Sign Up
-                        </Button>
+                        style={{ backgroundColor: '#22B573', border: 'none' }}
+                      >
+                        Sign Up
+                      </Button>
                     </div>
-                    <div className="col ">
-                    <Link to='/signup'>
-                    <Button className='btn-light'>
-                        Cancel
-                    </Button>
-                    </Link>
-                    </div>
-                </div>
 
-                <div className="row">
-                    <div class="col">
-                    <div className='d-flex justify-content-center  mt-3 mb-4'>
+                    <div className='col '>
+                      <Link to='/signup'>
+                        <Button className='btn-light'>Cancel</Button>
+                      </Link>
+                    </div>
+                  </div>
+
+                  <div className='row'>
+                    <div class='col'>
+                      <div className='d-flex justify-content-center mt-3 mb-4'>
                         <a href='http://localhost:5000/auth/google'>
-                          <Button className='btn-danger'>
+                          <Button
+                            className='btn'
+                            style={{
+                              backgroundColor: '#db4437',
+                              border: 'none',
+                            }}
+                          >
                             <p className='fs-6 my-0 mx-3'>GOOGLE</p>
                           </Button>
                         </a>
                       </div>
                     </div>
-                    </div>
+                  </div>
 
-                <div className="row">
-                    <div className="col">
-                    {'Already a registered user? '}
-                    <Link to='/signin'>Login!</Link>
+                  <div className='row'>
+                    <div className='d-flex justify-content-center'>
+                      Already a registered user?
+                      <Link to='/signin'>Login!</Link>
                     </div>
-                    </div>
-
+                  </div>
                 </div>
               </div>
             </form>
-
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
-
 export default Signup;

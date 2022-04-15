@@ -1,6 +1,5 @@
 .box{
     width: 100%;
-    height:90vh;
     display: flex;
     flex-direction:column;
     justify-content: center;
@@ -103,3 +102,4 @@
 .links a:hover{
     color:#ff8a73 !important; 
 }
+

@@ -7,9 +7,9 @@ function Navigation() {
   return (
     <nav class='navbar navbar-expand-lg navbar-light bg-light static-top'>
       <div class='container-fluid'>
-        <a class='navbar-brand' href='#'>
+        <Link to="/">
         <img src={Logo} className='img-fluid' alt='banner' style={{display:'block', height:'2em'}}/>
-        </a>
+        </Link>
         <button
           class='navbar-toggler'
           type='button'
